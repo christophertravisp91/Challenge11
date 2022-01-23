@@ -11,9 +11,6 @@ const writeFileAsync = util.promisify(fs.writeFile);
 // Server set-up
 const app  = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 app.use(express.static("./develop/public"));
 
 // "Get" Request
