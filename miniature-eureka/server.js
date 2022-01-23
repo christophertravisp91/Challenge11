@@ -10,11 +10,13 @@ const writeFileAsync = util.promisify(fs.writeFile);
 
 // Server set-up
 const app  = express();
+const port = 3001;
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./develop/public"));
 
 // "Get" Request
-app.get("/api/notes", (req,res) => {
+app.get("/api/notes", (req, res) => {
     readFileAsync("./develop/db/db.json", "utf8").then(function(data) {
         notes = [].concat(JSON.parse(data))
         res.json(notes);
@@ -50,6 +52,6 @@ app.get("*",  (req, res) => {
 });
 
 // Listener
-app.listen(3001, () => {
-    console.log("API server now on port 3001!")
+app.listen(port, () => {
+    console.log("API server now on port " + port + "!")
 });
