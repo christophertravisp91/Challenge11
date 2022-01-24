@@ -14,6 +14,7 @@ const port = 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(express.static("./develop/public"));
 
 // "Get" Request
@@ -26,7 +27,7 @@ app.get("/api/notes", (req, res) => {
 
 // "Post" Request
 app.post("/api/notes", (req, res) => {
-    const note = req.body;
+    const note = req.body.id;
     readFileAsync("./develop/db/db.json", "utf8").then(function(data) {
         const notes = [].concat(JSON.parse(data));
         note.id = notes.length + 1
